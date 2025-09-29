@@ -2,18 +2,22 @@ import { useState, useEffect, useRef } from 'react';
 import { Menu, X } from 'lucide-react';
 import './Header.css';
 
+// Importamos la imagen y le damos un nombre
+import LogoImg from '../assets/logo.png'; // Ajustá la ruta según donde esté tu logo
+
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSticky, setIsSticky] = useState(false); 
-
+  
   const menuRef = useRef(null);
   const headerRef = useRef(null);
+  
   const [stickyOffset, setStickyOffset] = useState(0);
 
   useEffect(() => {
     if (menuRef.current) {
-      const offset = menuRef.current.offsetTop;
-      setStickyOffset(offset);
+        const offset = menuRef.current.offsetTop;
+        setStickyOffset(offset);
     }
   }, []);
 
@@ -21,7 +25,11 @@ function Header() {
     if (stickyOffset === 0) return; 
 
     const handleScroll = () => {
-      setIsSticky(window.scrollY > stickyOffset);
+      if (window.scrollY > stickyOffset) {
+        setIsSticky(true);
+      } else {
+        setIsSticky(false);
+      }
     };
 
     window.addEventListener('scroll', handleScroll);
@@ -32,15 +40,16 @@ function Header() {
   }, [stickyOffset]);
 
   const menuClasses = `hidden md:block w-full max-w-6xl 2xl:max-w-[1400px] bg-white rounded-full custom-shadow p-2 transition-all duration-300 ${isSticky ? 'menu-fixed' : 'menu-absolute'}`;
+  
   const menuHeight = menuRef.current?.offsetHeight || 0; 
 
   return (
     <header ref={headerRef} className="bg-white p-4 z-50 shadow-md header-relative pt-10">
       <div className="container mx-auto flex flex-col items-center md:flex-row md:justify-between">
-        {/* Logo y tagline en la izquierda */}
         <div className="flex flex-col items-center md:items-start md:mb-0 relative top-[-3rem]">
+          {/* Usamos la importación */}
           <img
-            src="./logo.png" // ← ruta relativa como en Contact.jsx
+            src={LogoImg}
             alt="Logo de Vowk Studio"
             className="h-20 md:h-30 w-auto"
           />
@@ -54,8 +63,6 @@ function Header() {
           {isMenuOpen ? <X className="w-6 h-6 text-gray-800" /> : <Menu className="w-6 h-6 text-gray-800" />}
         </button>
       </div>
-
-      {/* Menú de navegación principal (Desktop) */}
       <nav ref={menuRef} className={menuClasses}>
         <ul className="flex justify-center items-center space-x-6 lg:space-x-8">
           <li><a href="#inicio" className="hover:text-blue-600 transition-colors font-medium">Inicio</a></li>
@@ -66,12 +73,7 @@ function Header() {
         </ul>
       </nav>
       
-      {/* Spacer para evitar salto */}
-      {isSticky && (
-        <div style={{ height: menuHeight }} className="hidden md:block"></div>
-      )}
-
-      {/* Menú móvil */}
+      {isSticky && <div style={{ height: menuHeight }} className="hidden md:block"></div>}
       {isMenuOpen && (
         <nav className="md:hidden bg-white shadow-lg py-4 transition-all duration-300">
           <ul className="flex flex-col space-y-4 px-6">
