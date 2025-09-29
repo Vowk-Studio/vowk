@@ -1,0 +1,36 @@
+/* Header.css */
+
+.header-relative {
+  position: relative;
+}
+
+/* Estilos originales de tu menú flotante */
+.menu-absolute {
+  position: absolute; /* Posición inicial */
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 1rem; /* Bajarlo desde el borde inferior */
+  /* O usar top: 6rem; para bajarlo desde arriba */
+  width: 100%;
+}
+
+/* Nueva clase para el efecto "pegajoso" (Sticky) */
+.menu-fixed {
+  position: fixed; 
+  top: 0;          /* Lo pega al borde superior */
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000; /* Asegurar que esté sobre el contenido */
+  
+}
+
+.custom-shadow {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /*sombra uniforme */
+}
+
+@media (max-width: 767px) {
+  .menu-absolute, .menu-fixed {
+    /* Ocultar en móvil para que no interfiera con el menú desplegable */
+    display: none;
+  }
+}
