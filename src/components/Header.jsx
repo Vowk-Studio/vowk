@@ -3,7 +3,7 @@ import { Menu, X } from 'lucide-react';
 import './Header.css';
 
 const pageData = {
-  logoUrl: '/logo.png',
+  logoUrl: 'logo.png',
 };
 
 function Header() {

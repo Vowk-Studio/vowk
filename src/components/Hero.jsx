@@ -2,7 +2,7 @@ import { useState } from 'react';
 import ContactForm from './ContactForm.jsx'; // Usamos la extensión explícita para resolver el error.
 
 const pageData = {
-  heroImageUrl: '/hero.png',
+  heroImageUrl: 'hero.png',
 };
 
 function Hero() {
