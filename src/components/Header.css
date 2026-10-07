@@ -1,36 +1,70 @@
 /* Header.css */
 
-.header-relative {
+/* Estilos de los links para que se vean Premium */
+.nav-link {
+  display: block;
+  padding: 0.5rem 1.25rem;
+  color: #4b5563; /* gray-600 */
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  border-radius: 9999px;
+  transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+  color: #2563eb; /* blue-600 */
+  background-color: rgba(37, 99, 235, 0.05);
+}
+
+/* Posición cuando está alineado al logo */
+.menu-inline {
   position: relative;
+  flex-grow: 1;
+  display: flex;
+  justify-content: center;
 }
 
-/* Estilos originales de tu menú flotante */
-.menu-absolute {
-  position: absolute; /* Posición inicial */
-  left: 50%;
-  transform: translateX(-50%);
-  bottom: 1rem; /* Bajarlo desde el borde inferior */
-  /* O usar top: 6rem; para bajarlo desde arriba */
-  width: 100%;
-}
-
-/* Nueva clase para el efecto "pegajoso" (Sticky) */
+/* Posición cuando flota (Sticky) */
 .menu-fixed {
-  position: fixed; 
-  top: 0;          /* Lo pega al borde superior */
+  position: fixed;
+  top: 1.2rem;
   left: 50%;
   transform: translateX(-50%);
-  z-index: 1000; /* Asegurar que esté sobre el contenido */
-  
+  z-index: 1000;
+  width: auto;
+  animation: floatIn 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 
+.menu-fixed .custom-shadow {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+/* Sombra suave para la cápsula */
 .custom-shadow {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /*sombra uniforme */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
 }
 
+/* Animación de entrada de la cápsula */
+@keyframes floatIn {
+  from {
+    top: -50px;
+    opacity: 0;
+  }
+  to {
+    top: 1.2rem;
+    opacity: 1;
+  }
+}
+
+/* Ajustes para móviles */
 @media (max-width: 767px) {
-  .menu-absolute, .menu-fixed {
-    /* Ocultar en móvil para que no interfiera con el menú desplegable */
-    display: none;
+  .menu-inline, .menu-fixed {
+    display: none !important;
   }
 }

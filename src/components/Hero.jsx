@@ -1,35 +1,47 @@
 import { useState } from 'react';
-import ContactForm from './ContactForm.jsx'; // Usamos la extensión explícita para resolver el error.
+import { motion } from 'framer-motion';
+import ContactForm from './ContactForm.jsx';
+import heroImage from '../assets/hero.webp';
 
 const pageData = {
-  heroImageUrl: 'hero.png',
+  heroImageUrl: heroImage,
 };
 
 function Hero() {
   const [submissionMessage, setSubmissionMessage] = useState(null);
 
-  const onFormSubmit = (data) => {
-    console.log('Datos del formulario:', data);
+  const onFormSubmit = async (data) => {
     setSubmissionMessage('¡Gracias! Tu consulta ha sido enviada con éxito.');
   };
 
   return (
-    <main id="inicio" className="relative flex justify-center p-4">
+    // Cambiamos main por section si es parte de una landing con más secciones
+    <section id="inicio" className="relative flex justify-center p-4" aria-label="Sección de inicio">
       
-      {/* Contenedor principal: w-full y flex-row en desktop */}
       <div className="w-full flex flex-col md:flex-row relative z-10">
 
-        {/* 1. Contenedor del Formulario (30% ancho en desktop, un poco separado y superpuesto) */}
-        <div className="w-full max-w-sm mx-auto md:w-[30%] relative z-20 md:ml-10 md:mr-[-10%]">
+        {/* 1. Contenedor del Formulario */}
+        <motion.div 
+          initial={{ opacity: 0, x: -50 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98], delay: 0.2 }}
+          className="w-full max-w-sm mx-auto md:w-[30%] relative z-20 md:ml-10 md:mr-[-10%] order-2 md:order-1 mt-6 md:mt-0"
+        >
+          {/* Asegúrate de que dentro de ContactForm el título sea un H2 */}
           <ContactForm
             submissionMessage={submissionMessage}
             onSubmit={onFormSubmit}
           />
-        </div>
+        </motion.div>
 
-        {/* 2. Contenedor de la Imagen (70% ancho en desktop) */}
-        <div
-          className="hidden md:flex justify-center items-center relative rounded-lg w-full md:w-[70%] md:ml-6"
+        {/* 2. Contenedor de la Imagen */}
+        <motion.div
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.2, ease: "easeOut" }}
+          className="flex justify-center items-center relative rounded-lg overflow-hidden w-full h-[400px] md:h-auto md:w-[70%] md:ml-6 order-1 md:order-2
+               before:absolute before:inset-0 before:z-0 
+               before:bg-gradient-to-t before:from-black/80 before:via-black/40 before:to-black/20"
           style={{
             backgroundImage: `url(${pageData.heroImageUrl})`,
             backgroundSize: 'cover',
@@ -37,17 +49,26 @@ function Hero() {
             backgroundRepeat: 'no-repeat',
           }}
         >
-          
-          {/* Texto */}
-          <div className="relative z-10 md:pt-[35%]">
-            <h3 className="text-white text-xl md:text-2xl lg:text-3xl font-extrabold text-center leading-snug m-0 drop-shadow-[2px_2px_2px_rgba(0,0,0,0.7)]">
-              “Creamos soluciones digitales innovadoras:<br></br> <span className="text-indigo-400">diseño</span>, <span className="text-indigo-400">desarrollo</span> y <span className="text-indigo-400">tecnología</span><br></br> para tu negocio"
-            </h3>
-          </div>
-        </div>
+       
+<motion.div 
+  initial={{ opacity: 0, y: 30 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.8, delay: 0.5 }}
+  className="relative z-10 w-full flex justify-center md:justify-end md:pr-[10%] pt-32 md:pt-[30%] px-4">
+  <div className="max-w-2xl">
+    <h1 className="text-white text-lg md:text-xl lg:text-2xl xl:text-3xl font-extrabold text-center leading-snug m-0 drop-shadow-[0_4px_4px_rgba(0,0,0,0.8)]">
+      Soluciones digitales innovadoras:<br /> 
+      <span className="text-indigo-400">diseño web</span>, 
+      <span className="text-indigo-400"> desarrollo</span> y 
+      <span className="text-indigo-400"> ciberseguridad </span><br />
+      para potenciar tu negocio
+    </h1>
+  </div>
+</motion.div>
+        </motion.div>
 
       </div>
-    </main>
+    </section>
   );
 }
 

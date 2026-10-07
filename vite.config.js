@@ -3,14 +3,30 @@ import react from '@vitejs/plugin-react-swc'
 
 // https://vite.dev/config/
 export default defineConfig({
-  base: '/vowk/',      // <- Muy importante para GitHub Pages
+  // Mantenemos base relativa para que funcione perfecto en Hostinger
+  base: '/', 
+  
   plugins: [react()],
+  
   build: {
-    outDir: 'dist',    // Carpeta de build por defecto, usada por gh-pages
-    sourcemap: false,  // Opcional: desactiva los sourcemaps para producción
+    outDir: 'dist',
+    sourcemap: false,
   },
+  
   server: {
-    open: true,        // Abre el navegador al iniciar dev server
-    port: 5173,        // Puerto por defecto de Vite
+    open: true,
+    port: 5173,
+  },
+
+  // --- CONFIGURACIÓN DE TESTING (REQUISITO GLOBANT) ---
+  test: {
+    // Permite usar funciones como 'describe' y 'expect' globalmente (estilo Java/JUnit)
+    globals: true,           
+    
+    // Simula el DOM de un navegador en la terminal para poder testear scroll y clics
+    environment: 'jsdom',    
+    
+    // Archivo de arranque para cargar los matchers de Testing Library
+    setupFiles: './src/setupTests.js', 
   }
 })
