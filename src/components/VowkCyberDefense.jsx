@@ -1,12 +1,11 @@
 import React from 'react';
-import { motion } from 'framer-motion';
+// 1. Cambiamos 'motion' por 'm' (Lite)
+import { m } from 'framer-motion';
 import { Shield, Zap, Activity, Lock, ArrowRight, ShieldCheck } from 'lucide-react';
-// Importamos las constantes que definimos para el número de teléfono
 import { WS_PRE, WS_NUM } from '../config/constants';
 
 const VowkCyberDefense = () => {
 
-  // Función para manejar el contacto seguro con mensajes personalizados
   const handleSecureContact = (type) => {
     const messages = {
       analisis: "Hola Vowk! Me interesa el Análisis de Riesgo para mi sitio web.",
@@ -53,7 +52,7 @@ const VowkCyberDefense = () => {
         {/* GRILLA BENTO */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
           
-          {/* Tarjeta 1: Análisis */}
+          {/* Tarjeta 1 */}
           <div className="bg-[#151515] p-8 rounded-3xl border border-white/5 flex flex-col justify-between group">
             <div>
               <div className="w-14 h-14 bg-cyan-500/10 border border-cyan-500/40 rounded-2xl flex items-center justify-center mb-10 text-[#00f2ff]">
@@ -64,15 +63,14 @@ const VowkCyberDefense = () => {
             </div>
             <button 
               onClick={() => handleSecureContact('analisis')}
-              aria-label="Solicitar análisis de riesgo ahora"
               className="mt-8 self-end px-4 py-2 rounded-full border border-cyan-500/30 text-[10px] font-bold uppercase text-cyan-500 hover:bg-cyan-500 hover:text-black transition-all flex items-center gap-2"
             >
               Analizar Ahora <ArrowRight size={14} />
             </button>
           </div>
 
-          {/* TARJETA CENTRAL: EL PROTAGONISTA */}
-          <motion.div 
+          {/* TARJETA CENTRAL: Reemplazamos motion.div por m.div */}
+          <m.div 
             whileHover={{ scale: 1.02, y: -5 }}
             className="bg-gradient-to-br from-[#00f2ff] via-[#a855f7] to-[#ff00ff] p-10 rounded-[2.5rem] text-white shadow-[0_0_50px_rgba(168,85,247,0.3)] relative overflow-hidden md:-mt-4"
           >
@@ -88,16 +86,15 @@ const VowkCyberDefense = () => {
               
               <button 
                 onClick={() => handleSecureContact('activar')}
-                aria-label="Pedí proteccion para tu empresa"
                 className="bg-white text-black py-5 rounded-2xl font-black text-xs uppercase tracking-widest hover:shadow-[0_0_30px_rgba(255,255,255,0.5)] transition-all flex items-center justify-center gap-3"
               >
                 Activar Ahora <ArrowRight size={18} />
               </button>
             </div>
             <div className="absolute top-4 right-4 w-16 h-16 bg-white/20 rounded-full blur-xl animate-pulse"></div>
-          </motion.div>
+          </m.div>
 
-          {/* Tarjeta 3: Diagnóstico */}
+          {/* Tarjeta 3 */}
           <div className="bg-[#151515] p-8 rounded-3xl border border-white/5 flex flex-col justify-between">
             <div>
               <div className="w-14 h-14 bg-magenta-500/10 border border-[#ff00ff]/40 rounded-2xl flex items-center justify-center mb-10 text-[#ff00ff]">
@@ -108,14 +105,13 @@ const VowkCyberDefense = () => {
             </div>
             <button 
               onClick={() => handleSecureContact('reporte')}
-              aria-label="Ver reporte de diagnóstico de seguridad"
               className="mt-8 self-end px-4 py-2 rounded-full border border-[#ff00ff]/30 text-[10px] font-bold uppercase text-[#ff00ff] hover:bg-[#ff00ff] hover:text-white transition-all flex items-center gap-2"
             >
               Ver Reporte <ArrowRight size={14} />
             </button>
           </div>
 
-          {/* FILA INFERIOR */}
+          {/* ... resto del contenido se mantiene igual ... */}
           <div className="bg-[#111] p-8 rounded-3xl border border-white/5 flex flex-col justify-between">
             <div className="flex items-center gap-4 mb-6">
               <div className="p-3 bg-cyan-500/10 rounded-xl text-[#00f2ff]"><Zap size={20} /></div>
@@ -144,7 +140,6 @@ const VowkCyberDefense = () => {
 
         </div>
 
-        {/* FOOTER SECCIÓN */}
         <div className="mt-20 flex justify-center gap-8 md:gap-12 text-[10px] font-bold text-white uppercase tracking-widest">
            <span onClick={() => handleSecureContact('info')} className="hover:text-[#00f2ff] cursor-pointer transition-colors">Contact</span>
            <span className="hover:text-[#ff00ff] cursor-pointer transition-colors">Loricus</span>

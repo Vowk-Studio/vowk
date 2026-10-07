@@ -1,5 +1,6 @@
 import React from 'react';
 import { Instagram, Linkedin, Facebook, X, Youtube, Mail, Link as LinkIcon } from 'lucide-react';
+import { getFooterStyles, toCQ } from './utils/styleHelpers';
 
 const ICON_COMPONENTS = {
   instagram: Instagram,
@@ -12,15 +13,12 @@ const ICON_COMPONENTS = {
 
 // --- VERSION 1: Minimalista Centrado ---
 export const FootersV1 = (props) => {
-  const { paddingY, bgColor, textColor, brandName, socialList } = props;
+  const { brandName, socialList } = props;
+  const styles = getFooterStyles(props);
   
   return (
     <footer 
-      style={{ 
-        backgroundColor: bgColor || '#000000', 
-        padding: `${paddingY || 60}px 5cqw`, 
-        color: textColor || '#ffffff' 
-      }} 
+      style={styles.footer} 
       className="w-full relative z-10 flex flex-col items-center text-center"
     >
       <div className="flex items-center gap-[1.5cqw] mb-[2cqw]">
@@ -29,7 +27,7 @@ export const FootersV1 = (props) => {
         <div className="h-[1px] w-[5cqw] bg-current opacity-20"></div>
       </div>
 
-      <h2 className="text-[4cqw] font-black uppercase italic tracking-tighter mb-[2cqw]">
+      <h2 style={styles.brand} className="font-black uppercase italic tracking-tighter mb-[2cqw]">
         {brandName || "VOWK STUDIO"}
       </h2>
 
@@ -58,20 +56,17 @@ export const FootersV1 = (props) => {
 
 // --- VERSION 2: Corporativo / Grilla ---
 export const FootersV2 = (props) => {
-  const { paddingY, bgColor, textColor, brandName, socialList } = props;
+  const { brandName, socialList } = props;
+  const styles = getFooterStyles(props);
   
   return (
     <footer 
-      style={{ 
-        backgroundColor: bgColor || '#ffffff', 
-        padding: `${paddingY || 40}px 8cqw`, 
-        color: textColor || '#000000' 
-      }} 
+      style={{ ...styles.footer, paddingLeft: '8cqw', paddingRight: '8cqw' }} 
       className="w-full relative z-10 border-t border-black/5"
     >
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-[4cqw] items-center text-center lg:text-left">
         <div>
-          <h2 className="text-[2cqw] font-black uppercase italic">{brandName || "VOWK"}</h2>
+          <h2 style={{ fontSize: toCQ(28) }} className="font-black uppercase italic">{brandName || "VOWK"}</h2>
           <p className="text-[0.8cqw] opacity-50 uppercase">Creative Design Agency</p>
         </div>
 
@@ -104,18 +99,14 @@ export const FootersV2 = (props) => {
 
 // --- VERSION 3: Bold / Contact Focus ---
 export const FootersV3 = (props) => {
-  const { paddingY, bgColor, textColor, brandName, socialList } = props;
+  const { brandName, socialList } = props;
+  const styles = getFooterStyles(props);
   
-  // Buscamos si hay un mail en la lista para mostrarlo destacado
   const mailLink = socialList?.find(red => red.platform === 'mail' && red.visible)?.url;
   
   return (
     <footer 
-      style={{ 
-        backgroundColor: bgColor || '#f5f5f5', 
-        padding: `${paddingY || 80}px 0`, 
-        color: textColor || '#000000' 
-      }} 
+      style={styles.footer} 
       className="w-full relative z-10 overflow-hidden flex flex-col items-center"
     >
       <div className="absolute inset-0 flex items-center justify-center opacity-[0.03] select-none pointer-events-none">

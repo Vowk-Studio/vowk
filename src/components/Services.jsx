@@ -1,5 +1,6 @@
 import { Rocket, Code, Layout, ArrowRight } from 'lucide-react';
-import { motion } from 'framer-motion'; // Importamos motion
+// 1. Cambiamos 'motion' por 'm' para usar la versión liviana
+import { m } from 'framer-motion'; 
 
 function Services() {
   const services = [
@@ -22,12 +23,13 @@ function Services() {
       benefit: "Liderazgo en tu sector."
     }
   ];
+
   return (
     <section id="servicios" className="py-20 md:py-28 bg-[#fafafa]">
       <div className="container mx-auto px-6 md:px-12">
         
-        {/* Encabezado Estratégico - Animación de bloque */}
-        <motion.div 
+        {/* 2. Reemplazamos motion.div por m.div */}
+        <m.div 
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: false, amount: 0.3 }}
@@ -40,29 +42,26 @@ function Services() {
           <p className="text-lg text-black leading-relaxed italic">
             "Véndele a la mente, no a la gente." Elevamos tu modelo de negocio con tecnología inteligente.
           </p>
-        </motion.div>
+        </m.div>
 
         <div className="grid md:grid-cols-3 gap-8">
           {services.map((service, index) => (
-            <motion.div 
+            <m.div 
               key={index}
-              // Animación escalonada: cada tarjeta espera 0.2s más que la anterior
               initial={{ opacity: 0, y: 40 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: false, amount: 0.2 }}
               transition={{ 
                 duration: 0.7, 
-                delay: index * 0.2, // El efecto "cascada"
+                delay: index * 0.2, 
                 ease: [0.21, 0.47, 0.32, 0.98] 
               }}
               className="group bg-white border border-gray-100 rounded-[2.5rem] p-10 shadow-sm hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.1)] transition-all duration-500 ease-out flex flex-col h-full"
             >
-              {/* Icono Estilizado */}
               <div className="w-16 h-16 bg-indigo-50 text-indigo-700 rounded-2xl flex items-center justify-center mb-8 group-hover:bg-indigo-600 group-hover:text-white group-hover:rotate-6 transition-all duration-500 shadow-indigo-100 shadow-lg">
                 {service.icon}
               </div>
 
-              {/* Contenido Principal */}
               <div className="flex-grow">
                 <h3 className="text-2xl font-bold text-black mb-4 tracking-tight">
                   {service.title}
@@ -72,20 +71,18 @@ function Services() {
                 </p>
               </div>
 
-              {/* Botón de Acción */}
               <a 
                 href="#inicio" 
                 className="group/btn relative inline-flex items-center justify-between bg-gray-50 hover:bg-indigo-600 px-6 py-4 rounded-2xl transition-all duration-300 overflow-hidden"
-              aria-label={`Saber más sobre ${service.title}`}
+                aria-label={`Saber más sobre ${service.title}`}
               >
                 <span className="text-sm font-bold text-indigo-700 group-hover/btn:text-white transition-colors duration-300 uppercase tracking-widest">
                   {service.benefit}
                 </span>
                 <ArrowRight className="w-5 h-5 text-indigo-700 group-hover/btn:text-white group-hover/btn:translate-x-1 transition-all duration-300" />
-                
                 <div className="absolute inset-0 w-full h-full bg-white/10 -translateX-full group-hover/btn:animate-[shimmer_1.5s_infinite] pointer-events-none"></div>
               </a>
-            </motion.div>
+            </m.div>
           ))}
         </div>
       </div>

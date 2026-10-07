@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Instagram, Linkedin, Mail, MapPin, ArrowUpCircle, X } from 'lucide-react';
-import { CONTACT_EMAIL, INSTAGRAM_URL, LOCATION_TEXT, LINKEDIN_URL } from '../config/constants';
+import { Instagram, Linkedin, Mail, MapPin, ArrowUpCircle, X, Phone } from 'lucide-react';
+import { CONTACT_EMAIL, INSTAGRAM_URL, LOCATION_TEXT, LINKEDIN_URL, WS_PRE, WHATSAPP_NUMBER, WHATSAPP_NUMBER_2, WHATSAPP_LINK_1, WHATSAPP_LINK_2 } from '../config/constants';
 
 function Footer() {
   // Estado para controlar qué texto legal mostrar (null, 'privacidad' o 'terminos')
@@ -14,6 +14,11 @@ function Footer() {
   };
 
   const handleSocialClick = (e, url) => {
+    e.preventDefault();
+    window.open(url, '_blank', 'noopener,noreferrer');
+  };
+
+  const handleOpenLink = (e, url) => {
     e.preventDefault();
     window.open(url, '_blank', 'noopener,noreferrer');
   };
@@ -82,6 +87,8 @@ function Footer() {
           <div>
             <h4 className="text-xs font-black uppercase tracking-[0.3em] text-indigo-500 mb-8">Contacto</h4>
             <ul className="space-y-6">
+              
+              {/* Email */}
               <li className="flex items-start gap-4 group">
                 <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400">
                   <Mail className="w-4 h-4" />
@@ -93,6 +100,34 @@ function Footer() {
                   </button>
                 </div>
               </li>
+
+              {/* WhatsApp Principal (Atención General) */}
+              <li className="flex items-start gap-4 group">
+                <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">Atención General</p>
+                  <button onClick={(e) => handleOpenLink(e, WHATSAPP_LINK_1)} className="text-sm hover:text-indigo-400 transition-colors bg-transparent border-none p-0">
+                    +{WS_PRE} {WHATSAPP_NUMBER.slice(WS_PRE.length)}
+                  </button>
+                </div>
+              </li>
+
+              {/* WhatsApp Secundario (Canal Comercial) */}
+              <li className="flex items-start gap-4 group">
+                <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400">
+                  <Phone className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-[10px] uppercase font-bold text-gray-500 tracking-widest mb-1">Canal Comercial</p>
+                  <button onClick={(e) => handleOpenLink(e, WHATSAPP_LINK_2)} className="text-sm hover:text-indigo-400 transition-colors bg-transparent border-none p-0">
+                    +{WS_PRE} {WHATSAPP_NUMBER_2.slice(WS_PRE.length)}
+                  </button>
+                </div>
+              </li>
+
+              {/* Ubicación */}
               <li className="flex items-start gap-4">
                 <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-400">
                   <MapPin className="w-4 h-4" />
@@ -102,9 +137,9 @@ function Footer() {
                   <p className="text-sm text-gray-400">{LOCATION_TEXT}</p>
                 </div>
               </li>
+
             </ul>
           </div>
-
           {/* Columna 4: Status */}
           <div className="bg-white/5 p-8 rounded-[2rem] border border-white/5 relative overflow-hidden">
             <div className="relative z-10">

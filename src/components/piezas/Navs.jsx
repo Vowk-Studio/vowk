@@ -1,14 +1,10 @@
 import React from 'react';
+import { toCQ, scrollToSection } from './utils/layout';
 
-const toCQ = (size) => `${(size / 1440) * 100}cqw`;
-
-const scrollToSection = (id) => {
-  const element = document.getElementById(id.toLowerCase());
-  if (element) {
-    element.scrollIntoView({ behavior: 'smooth' });
-  }
-};
-
+/**
+ * Sub-componente BrandArea: Mantiene la lógica de identidad visual.
+ * Se mantiene en este archivo por ser exclusivo de los Navs.
+ */
 const BrandArea = ({ config, onMouseDown }) => {
   const { 
     showLogo, showText, logoUrl, logoSize, logoPosX, logoPosY,
@@ -43,6 +39,8 @@ const BrandArea = ({ config, onMouseDown }) => {
   );
 };
 
+// --- VERSIONES DE NAVS ---
+
 export const NavV1 = (props) => (
   <nav className={`w-full relative ${props.navFontFamily}`} id='inicio' style={{ backgroundColor: props.bgColor, height: '8cqw' }}>
     <div className="flex items-center w-full px-[5cqw] h-full">
@@ -50,9 +48,12 @@ export const NavV1 = (props) => (
       <div className="flex flex-grow items-center justify-end gap-[2cqw]">
         {props.links?.map((link, index) => (
           <span key={index} 
-          onClick={() => scrollToSection(link)}
-          className="font-bold uppercase tracking-widest cursor-pointer" 
-               style={{ color: index === props.links.length - 1 ? props.buttonBg : props.textColor, fontSize: toCQ(props.fontSize) }}>
+            onClick={() => scrollToSection(link)}
+            className="font-bold uppercase tracking-widest cursor-pointer hover:opacity-70 transition-opacity" 
+            style={{ 
+              color: index === props.links.length - 1 ? props.buttonBg : props.textColor, 
+              fontSize: toCQ(props.fontSize) 
+            }}>
             {link}
           </span>
         ))}
@@ -66,13 +67,13 @@ export const NavV2 = (props) => (
     <BrandArea config={props} onMouseDown={props.onMouseDown} />
     <div 
       onMouseDown={(e) => props.onMouseDown(e, 'menu')}
-      className="rounded-[5cqw] py-[0.8cqw] flex justify-center items-center shadow-lg border border-white/20 backdrop-blur-md"
+      className="rounded-[5cqw] py-[0.8cqw] flex justify-center items-center shadow-lg border border-white/20 backdrop-blur-md transition-all"
       style={{ 
         position: 'absolute',
         left: `${props.navPosX}%`,
         top: `${props.navPosY}%`,
         transform: 'translate(-50%, -50%)',
-        backgroundColor: props.navContainerBg, // Aquí aplicas el color sólido o esmerilado (RGBA)
+        backgroundColor: props.navContainerBg,
         width: '90%',
         paddingLeft: '5cqw',
         paddingRight: '5cqw',
@@ -83,9 +84,12 @@ export const NavV2 = (props) => (
     >
       {props.links?.map((link, index) => (
         <span key={index} 
-        onClick={() => scrollToSection(link)}
-        className="cursor-pointer font-black uppercase tracking-tighter whitespace-nowrap"
-              style={{ color: index === props.links.length - 1 ? props.buttonBg : props.textColor, fontSize: toCQ(props.fontSize) }}>
+          onClick={() => scrollToSection(link)}
+          className="cursor-pointer font-black uppercase tracking-tighter whitespace-nowrap hover:scale-105 transition-transform"
+          style={{ 
+            color: index === props.links.length - 1 ? props.buttonBg : props.textColor, 
+            fontSize: toCQ(props.fontSize) 
+          }}>
           {link}
         </span>
       ))}
@@ -120,9 +124,8 @@ export const NavV3 = (props) => (
         <button 
           key={index} 
           onClick={() => scrollToSection(link)}
-          className="flex-1 py-[0.6cqw] rounded-[1cqw] font-black uppercase tracking-widest transition-all border-none"
+          className="flex-1 py-[0.6cqw] rounded-[1cqw] font-black uppercase tracking-widest transition-all border-none hover:brightness-110 active:scale-95 cursor-pointer"
           style={{ 
-            // Ahora TODOS usan los mismos colores del editor
             backgroundColor: props.buttonBg,
             color: props.buttonTextColor,
             fontSize: toCQ(props.fontSize)
